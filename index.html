@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Box Model Similator</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        img {
+            background-color: green;
+            padding: 0px;
+            margin: 0px;
+            width: 200px;
+            border: 5px solid brown;
+        }
+    </style>
+</head>
+
+<body style="background-color: #b3b3b3;">
+    <div style="margin: 40px 0;">
+        <label for="">Margin</label>
+        <input id="margin" type="range" min="0" max="100" value="0">
+        <label for="">Padding</label>
+        <input id="padding" type="range" min="0" max="100" value="0">
+        <button id="add">Add house 🏡</button>
+        <button id="remove">Remove house 🔨</button>
+    </div>
+
+    <div id="imageContainer"></div>
+
+    <script>
+        let margin = document.getElementById('margin');
+        let padding = document.getElementById('padding');
+        let Add = document.getElementById('add')
+        let Remove = document.getElementById('remove')
+        let imageContainer = document.getElementById('imageContainer');
+
+        Add.addEventListener('click', () => {
+            var imgElement = document.createElement('img');
+            imgElement.className = 'house';
+            imgElement.src = 'images/house.png';
+            imageContainer.appendChild(imgElement);
+
+            let house = document.getElementsByClassName('house');
+
+            let houses = Object.values(house);
+            houses.map(house => {
+                margin.addEventListener('input', () => {
+                    house.style.margin = `${margin.value}px`
+                })
+                padding.addEventListener('input', () => {
+                    house.style.padding = `${padding.value}px`
+                })
+            })
+        })
+
+        Remove.addEventListener('click', () => {
+            imageContainer.removeChild(imageContainer.lastElementChild)
+        })
+
+
+    </script>
+</body>
+
+</html>
